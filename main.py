@@ -53,6 +53,28 @@ def list_prompts(prompt_list=None):
     print("-" * 50)
 
 
+def add_prompt():
+    print("\n [ 새 프롬프트 추가 ]")
+    title = input("제목: ").strip()
+    category = input("카테고리 (예: 텍스트, 이미지, 개발): ").strip()
+    content = input("프롬프트 내용: ").strip()
+
+    if not title or not content:
+        print("\n제목과 내용은 필수 입력 항목입니다.")
+        return
+
+    new_id = max([p["id"] for p in prompts], default=0) + 1
+    new_prompt = {
+        "id": new_id,
+        "title": title,
+        "category": category if category else "기타",
+        "content": content,
+        "is_favorite": False,
+    }
+    prompts.append(new_prompt)
+    print(f"\n 프롬프트 #{new_id}가 새로 추가되었습니다!")
+
+
 def main():
     while True:
         display_menu()
@@ -60,6 +82,8 @@ def main():
 
         if choice == "1":
             list_prompts()
+        elif choice == "3":
+            add_prompt()
         elif choice == "0":
             print("\n프로그램을 종료합니다.")
             break
