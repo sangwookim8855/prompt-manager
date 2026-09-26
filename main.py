@@ -75,6 +75,16 @@ def add_prompt():
     print(f"\n 프롬프트 #{new_id}가 새로 추가되었습니다!")
 
 
+def filter_by_category():
+    categories = list(set(p["category"] for p in prompts))
+    print(f"\n현재 등록된 카테고리: {', '.join(categories)}")
+    target_cat = input("조회할 카테고리를 입력하세요: ").strip()
+
+    filtered = [p for p in prompts if p["category"].lower() == target_cat.lower()]
+    print(f"\n [ '{target_cat}' 카테고리 결과 ]")
+    list_prompts(filtered)
+
+
 def main():
     while True:
         display_menu()
@@ -84,6 +94,8 @@ def main():
             list_prompts()
         elif choice == "3":
             add_prompt()
+        elif choice == "4":
+            filter_by_category()
         elif choice == "0":
             print("\n프로그램을 종료합니다.")
             break
