@@ -53,6 +53,27 @@ def list_prompts(prompt_list=None):
     print("-" * 50)
 
 
+def view_prompt_detail():
+    list_prompts()
+    try:
+        pid = int(input("\n상세 조회할 프롬프트 ID를 입력하세요: "))
+        found = next((p for p in prompts if p["id"] == pid), None)
+        if found:
+            fav_status = "등록됨" if found["is_favorite"] else "해제됨"
+            print("\n" + "=" * 50)
+            print(f" ID        : {found['id']}")
+            print(f" 제목      : {found['title']}")
+            print(f" 카테고리  : {found['category']}")
+            print(f" 즐겨찾기  : {fav_status}")
+            print("-" * 50)
+            print(f" 내용:\n{found['content']}")
+            print("=" * 50)
+        else:
+            print("\n해당 ID의 프롬프트를 찾을 수 없습니다.")
+    except ValueError:
+        print("\n올바른 숫자를 입력해 주세요.")
+
+
 def add_prompt():
     print("\n [ 새 프롬프트 추가 ]")
     title = input("제목: ").strip()
@@ -128,6 +149,8 @@ def main():
 
         if choice == "1":
             list_prompts()
+        elif choice == "2":
+            view_prompt_detail()
         elif choice == "3":
             add_prompt()
         elif choice == "4":
