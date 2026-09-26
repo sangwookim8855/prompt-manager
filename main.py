@@ -85,6 +85,21 @@ def filter_by_category():
     list_prompts(filtered)
 
 
+def search_prompts():
+    keyword = input("\n검색할 키워드를 입력하세요 (제목/내용): ").strip().lower()
+    if not keyword:
+        print("\n검색어를 입력해 주세요.")
+        return
+
+    results = [
+        p
+        for p in prompts
+        if keyword in p["title"].lower() or keyword in p["content"].lower()
+    ]
+    print(f"\n [ '{keyword}' 검색 결과 ]")
+    list_prompts(results)
+
+
 def toggle_favorite():
     list_prompts()
     try:
@@ -117,6 +132,8 @@ def main():
             add_prompt()
         elif choice == "4":
             filter_by_category()
+        elif choice == "5":
+            search_prompts()
         elif choice == "6":
             toggle_favorite()
         elif choice == "7":
