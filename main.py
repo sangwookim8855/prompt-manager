@@ -85,6 +85,27 @@ def filter_by_category():
     list_prompts(filtered)
 
 
+def toggle_favorite():
+    list_prompts()
+    try:
+        pid = int(input("\n즐겨찾기를 토글할 프롬프트 ID를 입력하세요: "))
+        found = next((p for p in prompts if p["id"] == pid), None)
+        if found:
+            found["is_favorite"] = not found["is_favorite"]
+            status = "★ 등록" if found["is_favorite"] else "☆ 해제"
+            print(f"\n'{found['title']}' 항목이 즐겨찾기에 {status}되었습니다.")
+        else:
+            print("\n해당 ID의 프롬프트를 찾을 수 없습니다.")
+    except ValueError:
+        print("\n올바른 숫자를 입력해 주세요.")
+
+
+def view_favorites():
+    favorites = [p for p in prompts if p["is_favorite"]]
+    print("\n [ ★ 즐겨찾기 프롬프트 목록 ]")
+    list_prompts(favorites)
+
+
 def main():
     while True:
         display_menu()
@@ -96,6 +117,10 @@ def main():
             add_prompt()
         elif choice == "4":
             filter_by_category()
+        elif choice == "6":
+            toggle_favorite()
+        elif choice == "7":
+            view_favorites()
         elif choice == "0":
             print("\n프로그램을 종료합니다.")
             break
