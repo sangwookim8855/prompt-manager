@@ -1,3 +1,29 @@
+# 초기 프롬프트 데이터 (최소 3개 이상)
+prompts = [
+    {
+        "id": 1,
+        "title": "블로그 글 작성 페르소나",
+        "category": "텍스트",
+        "content": "당신은 IT 전문 에디터입니다. 서론-본론-결론 구조로 작성해 주세요.",
+        "is_favorite": False,
+    },
+    {
+        "id": 2,
+        "title": "SF 스타일 배경 이미지 생성",
+        "category": "이미지",
+        "content": "Cyberpunk city street at night, neon lights, 8k resolution, photorealistic",
+        "is_favorite": True,
+    },
+    {
+        "id": 3,
+        "title": "코드 리뷰어 페르소나",
+        "category": "개발",
+        "content": "제공된 Python 코드의 가독성과 성능 관점에서 개선점을 피드백해 주세요.",
+        "is_favorite": False,
+    },
+]
+
+
 def display_menu():
     print("\n" + "=" * 40)
     print("      📝 나만의 프롬프트 관리자")
@@ -13,12 +39,28 @@ def display_menu():
     print("=" * 40)
 
 
+def list_prompts(prompt_list=None):
+    target_list = prompts if prompt_list is None else prompt_list
+    if not target_list:
+        print("\n등록된 프롬프트가 없습니다.")
+        return
+
+    print("\n [ 프롬프트 목록 ]")
+    print("-" * 50)
+    for p in target_list:
+        fav_mark = "★" if p["is_favorite"] else "☆"
+        print(f"[{p['id']}] {fav_mark} [{p['category']}] {p['title']}")
+    print("-" * 50)
+
+
 def main():
     while True:
         display_menu()
         choice = input("선택할 메뉴 번호를 입력하세요: ").strip()
 
-        if choice == "0":
+        if choice == "1":
+            list_prompts()
+        elif choice == "0":
             print("\n프로그램을 종료합니다.")
             break
         else:
@@ -27,4 +69,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
