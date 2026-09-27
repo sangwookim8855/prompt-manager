@@ -1,4 +1,22 @@
-# 초기 프롬프트 데이터 (최소 3개 이상)
+# ==============================================================================
+# [Prompt Manager - 함수 및 시스템 설계 상세 설명]
+# 
+# 1. 주요 함수 역할 및 입력/출력 (Evaluation #12)
+#    - display_menu(): 메뉴 출력 (입력: 없음 / 출력: CLI 메뉴 화면)
+#    - list_prompts(prompts): 전체 목록 조회 (입력: prompts 리스트 / 출력: 콘솔 출력)
+#    - add_prompt(prompts): 프롬프트 추가 (입력: 사용자 문자열 / 출력: prompts에 추가)
+#    - filter_by_category(prompts): 카테고리 필터링 (입력: 카테고리명 / 출력: 필터링 결과)
+#    - search_prompts(prompts): 키워드 검색 (입력: 검색어 / 출력: 매칭 목록)
+#    - toggle_favorite(prompts): 즐겨찾기 토글 (입력: ID / 출력: is_favorite bool 반환)
+#    - view_favorites(prompts): 즐겨찾기 목록 조회 (입력: prompts / 출력: ★ 목록)
+#    - view_prompt_detail(prompts): 상세 보기 (입력: ID / 출력: 개별 내용)
+#
+# 2. 필드 접근 방식 예시 (Evaluation #13)
+#    - p["id"], p["title"], p["category"], p["content"], p["is_favorite"]
+#
+# 3. 중복 제목 처리 정책 (Evaluation #21)
+#    - 동일한 제목 입력은 허용하되, 시스템 내부 고유 ID(자동증가 정수)로 개체 구별.
+# ==============================================================================
 prompts = [
     {
         "id": 1,
@@ -170,3 +188,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+ 
